@@ -1,0 +1,31 @@
+{# This macro is used to list the facts from the input file which contains facts and rules #}
+{% macro facts_handlers(data) -%}
+{%- for term in data %}
+{%- if term['isFact'] %}
+{{ caller(term) }}
+{%- endif %}
+{%- endfor %}
+{%- endmacro %}
+
+{# This macro is used to list the rules from the input file which contains facts and rules #}
+{% macro rules_handlers(data) -%}
+{%- for term in data %}
+{%- if not term['isFact'] -%}
+{{ caller(term) }}
+{%- endif -%}
+{%- endfor %}
+{%- endmacro %}
+
+{# This macro returns the arguments for a giving term #}
+{% macro term_arguments(term) -%}
+{%- for term in data %}
+{%- if not term['isFact'] -%}
+{{ caller(term) }}
+{%- endif -%}
+{%- endfor %}
+{%- endmacro %}
+
+
+
+
+
